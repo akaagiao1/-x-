@@ -7,6 +7,10 @@ bypass-system = true
 ipv6 = true
 
 [Rule]
+#Disney plus
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Shadowrocket/Disney/Disney.list,PROXY
+# Netflix
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Netflix/Netflix.list,PROXY
 # Unbreak
 RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Unbreak.list,DIRECT
 
