@@ -82,10 +82,6 @@
                 "outbound":"bahamut"
             },
             {
-                "rule_set":"youtube",
-                "outbound":"youtube"
-            },
-            {
                 "domain_keyword":[
                     "claude"
                 ],
@@ -178,13 +174,6 @@
                 "type":"remote",
                 "format":"binary",
                 "url":"https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo-lite/mixed/telegram.srs",
-                "download_detour":"proxy"
-            },
-            {
-                "tag":"youtube",
-                "type":"remote",
-                "format":"binary",
-                "url":"https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo-lite/geosite/youtube.srs",
                 "download_detour":"proxy"
             }
         ],
