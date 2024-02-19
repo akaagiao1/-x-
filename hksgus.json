@@ -78,8 +78,10 @@
                 "outbound":"netflix"
             },
             {
-                "rule_set":"bahamut",
-                "outbound":"bahamut"
+                "domain_keyword":[
+                    "misakf"
+                ],
+                "outbound":"direct"
             },
             {
                 "domain_keyword":[
@@ -100,10 +102,6 @@
                 "outbound":"direct"
             },
             {
-                "rule_set":"telegram",
-                "outbound":"telegram"
-            },
-            {
                 "rule_set":"cn",
                 "outbound":"direct"
             },
@@ -118,13 +116,6 @@
                 "type":"remote",
                 "format":"binary",
                 "url":"https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo-lite/mixed/apple.srs",
-                "download_detour":"proxy"
-            },
-            {
-                "tag":"bahamut",
-                "type":"remote",
-                "format":"binary",
-                "url":"https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo-lite/geosite/bahamut.srs",
                 "download_detour":"proxy"
             },
             {
@@ -168,13 +159,6 @@
                 "format":"binary",
                 "url":"https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/openai.srs",
                 "download_detour":"proxy"
-            },
-            {
-                "tag":"telegram",
-                "type":"remote",
-                "format":"binary",
-                "url":"https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo-lite/mixed/telegram.srs",
-                "download_detour":"proxy"
             }
         ],
         "final":"final",
@@ -201,25 +185,6 @@
         },
         {
             "tag":"google",
-            "type":"selector",
-            "outbounds":[
-                "proxy",
-                "direct",
-                "hk",
-                "hk-auto",
-                "tw",
-                "tw-auto",
-                "sg",
-                "sg-auto",
-                "us",
-                "us-auto",
-                "all",
-                "all-auto"
-            ],
-            "default":"proxy"
-        },
-        {
-            "tag":"telegram",
             "type":"selector",
             "outbounds":[
                 "proxy",
@@ -267,25 +232,6 @@
                 "all-auto"
             ],
             "default":"sg-auto"
-        },
-        {
-            "tag":"bahamut",
-            "type":"selector",
-            "outbounds":[
-                "proxy",
-                "direct",
-                "hk",
-                "hk-auto",
-                "tw",
-                "tw-auto",
-                "sg",
-                "sg-auto",
-                "us",
-                "us-auto",
-                "all",
-                "all-auto"
-            ],
-            "default":"proxy"
         },
         {
             "tag":"openai",
