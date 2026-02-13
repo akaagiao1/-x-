@@ -1,5 +1,5 @@
 #!/bin/bash
-# 自动生成带 WARP 出站的 sing-box 配置文件示例
+# 自动生成带 WARP 出站的 sing-box 配置文件，并保存到 /root/sing-warp 目录
 # 用法: ./sb-warp-gen.sh [策略]
 # 策略可选: all (默认), ipv4, ipv6
 
@@ -139,7 +139,20 @@ main() {
     get_warp_params
     detect_sendip
     set_policy_vars
-    generate_config
+
+    # 创建输出目录
+    OUTPUT_DIR="/root/sing-warp"
+    mkdir -p "$OUTPUT_DIR"
+
+    # 生成带时间戳的文件名（精确到秒）
+    FILENAME="sing-warp-$(date +%Y%m%d-%H%M%S).json"
+    OUTPUT_PATH="${OUTPUT_DIR}/${FILENAME}"
+
+    # 生成配置并写入文件
+    generate_config > "$OUTPUT_PATH"
+
+    # 向标准错误输出文件位置（不影响静默运行）
+    echo "配置文件已生成：$OUTPUT_PATH" >&2
 }
 
 main
