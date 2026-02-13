@@ -1,7 +1,6 @@
 sing-box文件
 下载脚本：
 
-bash
 ``
 wget -O sb-warp-gen.sh https://raw.githubusercontent.com/akaagiao1/-x-/refs/heads/main/warp.sh
 ``
@@ -9,7 +8,6 @@ wget -O sb-warp-gen.sh https://raw.githubusercontent.com/akaagiao1/-x-/refs/head
 赋予执行权限：
 
 
-bash
 ``
 chmod +x sb-warp-gen.sh
 ``
@@ -20,7 +18,6 @@ chmod +x sb-warp-gen.sh
 生成所有流量经过WARP的配置（默认策略）：
 
 
-bash
 ``
 ./sb-warp-gen.sh > config.json
 ``
