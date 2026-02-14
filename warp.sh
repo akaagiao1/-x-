@@ -1,5 +1,5 @@
 #!/bin/bash
-# 自动生成带 WARP 出站的 sing-box 配置文件，并保存到 /root/sing-warp 目录
+# 自动生成带 WARP 出站的 sing-box 配置文件，保存到 /root/sing-warp 目录
 # 用法: ./sb-warp-gen.sh [策略]
 # 策略可选: all (默认), ipv4, ipv6
 
@@ -11,16 +11,26 @@ POLICY=${1:-all}
 get_warp_params() {
     local warpurl
     warpurl=$(curl -s --connect-timeout 5 https://warp.xijp.eu.org 2>/dev/null)
-    if echo "$warpurl" | grep -q html; then
-        # 备用默认参数（可能已失效，建议定期更新）
+
+    # 尝试从网页内容中提取参数（网站返回的是纯文本，包含 Private_key、IPV6、reserved）
+    pvk_tmp=$(echo "$warpurl" | awk -F'：' '/Private_key/{print $2}' | xargs)
+    wpv6_tmp=$(echo "$warpurl" | awk -F'：' '/IPV6/{print $2}' | xargs)
+    res_tmp=$(echo "$warpurl" | awk -F'：' '/reserved/{print $2}' | xargs)
+
+    # 检查是否三个参数都成功提取
+    if [ -n "$pvk_tmp" ] && [ -n "$wpv6_tmp" ] && [ -n "$res_tmp" ]; then
+        pvk="$pvk_tmp"
+        wpv6="$wpv6_tmp"
+        res="$res_tmp"
+        echo "从网络获取 WARP 参数成功" >&2
+    else
+        # 提取失败，使用备用参数（建议定期手动更新）
         pvk='52cuYFgCJXp0LAq7+nWJIbCXXgU9eGggOc+Hlfz5u6A='
         wpv6='2606:4700:110:8d8d:1845:c39f:2dd5:a03a'
         res='[215, 69, 233]'
-    else
-        pvk=$(echo "$warpurl" | awk -F'：' '/Private_key/{print $2}' | xargs)
-        wpv6=$(echo "$warpurl" | awk -F'：' '/IPV6/{print $2}' | xargs)
-        res=$(echo "$warpurl" | awk -F'：' '/reserved/{print $2}' | xargs)
+        echo "警告：网络获取失败，使用备用参数（可能已失效）" >&2
     fi
+
     echo "获取到 WARP 参数:" >&2
     echo "私钥: $pvk" >&2
     echo "IPv6: $wpv6" >&2
